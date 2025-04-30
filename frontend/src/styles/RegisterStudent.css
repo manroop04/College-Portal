@@ -1,0 +1,424 @@
+/* Main Container */
+.register-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #f8fafc;
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  /* Header Section */
+  .register-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .register-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  
+  .register-subtitle {
+    font-size: 1.1rem;
+    color: #64748b;
+  }
+  
+  /* Form Elements */
+  .form-section {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-label {
+    display: block;
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 0.5rem;
+  }
+  
+  .form-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.2s;
+  }
+  
+  .form-input:focus {
+    outline: none;
+    border-color: #93c5fd;
+    box-shadow: 0 0 0 3px rgba(147, 197, 253, 0.3);
+  }
+  
+  /* Action Buttons */
+  .action-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .btn {
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+    font-size: 1rem;
+  }
+  
+  .btn-primary {
+    background-color: #3b82f6;
+    color: white;
+  }
+  
+  .btn-primary:hover {
+    background-color: #2563eb;
+  }
+  
+  .btn-primary:disabled {
+    background-color: #bfdbfe;
+    cursor: not-allowed;
+  }
+  
+  .btn-success {
+    background-color: #10b981;
+    color: white;
+  }
+  
+  .btn-success:hover {
+    background-color: #059669;
+  }
+  
+  .btn-warning {
+    background-color: #f59e0b;
+    color: white;
+  }
+  
+  .btn-warning:hover {
+    background-color: #d97706;
+  }
+  
+  .btn-danger {
+    background-color: #ef4444;
+    color: white;
+  }
+  
+  .btn-danger:hover {
+    background-color: #dc2626;
+  }
+  
+  .btn-secondary {
+    background-color: #64748b;
+    color: white;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #475569;
+  }
+  
+  /* Camera Preview */
+
+  /* Add these new styles to your RegisterStudent.css */
+
+/* Camera Preview Container */
+/* .camera-preview-container {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+   */
+  .live-camera {
+    position: relative;
+    flex: 2;  /* Takes 2/3 of the space */
+    background: black;
+    border-radius: 8px;
+    overflow: hidden;
+    height: 400px;
+  }
+  
+  .captured-preview {
+    flex: 1;  /* Takes 1/3 of the space */
+    background: white;
+    border-radius: 8px;
+    padding: 1rem;
+    overflow-y: auto;
+    max-height: 400px;
+  }
+  
+  .preview-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #334155;
+  }
+  
+  .preview-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+  
+  .preview-item {
+    position: relative;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  
+  .preview-image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  .preview-number {
+    position: absolute;
+    top: 0.25rem;
+    left: 0.25rem;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 0.1rem 0.4rem;
+    border-radius: 50%;
+    font-size: 0.7rem;
+  }
+  
+  /* Remove or modify these existing styles */
+  .camera-preview video {
+    /* Remove the width: 50% */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .camera-container {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1.5rem;
+  }
+  
+  .camera-preview {
+    position: relative;
+    background: black;
+    border-radius: 8px;
+    overflow: hidden;
+    height: 400px;
+    margin-bottom: 1rem;
+  }
+  
+  /* .camera-preview video {
+    width: 50%;
+    height: 100%;
+    object-fit: cover;
+  }
+   */
+  .capture-count {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+  }
+  
+  .camera-controls {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  /* Status Messages */
+  .status-message {
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+  }
+  
+  .status-success {
+    background-color: #d1fae5;
+    color: #065f46;
+  }
+  
+  .status-info {
+    background-color: #dbeafe;
+    color: #1e40af;
+  }
+  
+  /* Students List */
+  .students-list {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+  
+  .students-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  
+  .students-container {
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+  }
+  
+  .student-item {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #f1f5f9;
+  }
+  
+  .student-item:last-child {
+    border-bottom: none;
+  }
+  
+  .student-image-count {
+    font-size: 0.9rem;
+    color: #64748b;
+    margin-left: 0.5rem;
+  }
+  
+  /* Back Button */
+  .back-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background: #e2e8f0;
+    border: none;
+    border-radius: 6px;
+    font-weight: 500;
+    color: #334155;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-bottom: 1.5rem;
+  }
+  
+  .back-button:hover {
+    background: #cbd5e1;
+  }
+  
+  /* Animations */
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+  
+  .recording-indicator {
+    animation: pulse 1.5s infinite;
+  }
+  
+  /* File Upload */
+  .file-upload {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+  }
+  
+  .file-upload-input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
+
+
+  /* Camera Container Styles */
+.camera-container {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Flex container for side-by-side layout */
+  .camera-split-view {
+    display: flex;
+    gap: 1rem;
+    height: 400px;
+    margin-bottom: 1rem;
+  }
+  
+  /* Shared styles for both camera and preview */
+  .camera-feed, .image-preview {
+    position: relative;
+    flex: 1;
+    border-radius: 8px;
+    overflow: hidden;
+    background: black;
+  }
+  
+  /* Video and image elements */
+  .camera-feed video, .image-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  /* Placeholder when no image captured */
+  .image-preview.empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f1f5f9;
+    color: #64748b;
+    font-weight: 500;
+  }
+  
+  /* Camera controls */
+  .camera-controls {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .signup{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+    background-color: #059669;
+  }
+  /* Capture counter */
+  .capture-count {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    z-index: 2;
+  }

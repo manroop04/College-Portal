@@ -1,0 +1,88 @@
+.lost-found-item-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .lost-item-page {
+    background-color: white;
+    border-radius: 20px;
+    padding: 30px;
+    width: 100%;
+    max-width: 650px;
+    margin: auto;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    box-sizing: border-box;
+  }
+  
+  .lost-item-page h1 {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 2rem;
+  }
+  
+  .lost-detail-content {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    font-size: 1.1rem;
+  }
+  
+  .lost-detail-content p {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    word-break: break-word;
+  }
+  
+  .lost-detail-image {
+    max-width: 150px;
+    max-height: 100px;
+    object-fit: contain;
+    border-radius: 8px;
+    margin-left: 1rem;
+  }
+  
+  button {
+    background-color: #9c8fc0;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 20px;
+    font-size: 16px;
+    margin: 10px auto 0;
+    display: block;
+    width: fit-content;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+
+  @media (max-width: 768px) {
+    .lost-item-page {
+      padding: 20px;
+      max-width: 90%;
+    }
+  
+    .lost-detail-content {
+      font-size: 1rem;
+      gap: 20px;
+    }
+  
+    .lost-detail-content p {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .lost-detail-image {
+      margin-left: 0;
+      margin-top: 10px;
+    }
+  }
+  

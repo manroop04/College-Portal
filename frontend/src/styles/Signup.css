@@ -1,0 +1,141 @@
+.body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: white;
+}
+
+.left-panel {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.divider {
+    width: 1.5px;
+    background-color: white;
+    height: 80%;
+    align-self: center;
+    opacity: 0.6;
+}
+
+.right-panel {
+    flex: 1;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 15%;
+    height: 70%;
+}
+
+.signup-container {
+    background-color: #1154AC;
+    border-radius: 12px;
+    width: 60%;
+    height: 70%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 70%;
+    font-size: 20px;
+}
+
+.input-signup {
+    padding: 3% 7%;
+    height: 6vh;
+    width: 20vw;
+    border: none;
+    border-bottom: 1px solid white;
+    font-size: 19px;
+    background-color: transparent;
+    color: white;
+}
+
+.input-signup::placeholder {
+    color: white;
+    opacity: 0.8;
+}
+
+.password-wrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+}
+
+.password-toggle {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid white;
+    width: 15%;
+    height: 100%;
+    padding: 1.2%;
+    cursor: pointer;
+    font-size: 15px;
+    color: white;
+}
+
+.upload-student {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px;
+}
+
+.upload-student p {
+    font-size: 20px;
+    font-weight: 500;
+    color: #333;
+    margin: 0;
+    color: white;
+}
+
+.upload-user {
+    background-color: #7DB7FF;
+    color: black;
+    font-size: 16px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.upload-user:hover {
+    background-color: #7DB7FF;
+}
+
+.upload-user:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.5);
+}
+
+
+.signup {
+    margin: 8% 0%;
+    height: 6vh;
+    width: 20vw;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    background-color: #0A2342;
+    color: white;
+}

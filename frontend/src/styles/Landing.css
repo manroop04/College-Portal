@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Spline+Sans:wght@400;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Spline Sans', sans-serif;
+    box-sizing: border-box;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+}
+
+/* right side  */
+.right {
+    position: relative;
+    width: 50%;
+    background-color: #0A2342;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bubble {
+    position: absolute;
+    border-radius: 50%;
+    z-index: 1;
+    opacity: 0.9;
+}
+
+.top-bubble {
+    width: 140px;
+    height: 140px;
+    top: 40px;
+    right: 60px;
+    border-radius: 40% 60% 60% 40% / 50% 60% 40% 50%;
+    background-color: #7DB7FF;
+}
+
+.middle-bubble {
+    width: 27%;
+    height: 27%;
+    top: 40%;
+    left: -4%;
+    border-radius: 40% 60% 60% 40% / 50% 60% 40% 50%;
+    background-color: #BCDAFF;
+
+}
+
+.bottom-bubble {
+    width: 70%;
+    height: 70%;
+    bottom: -20%;
+    right: -1.2%;
+    background-color: #0057D9;
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+}
+
+.text-overlay {
+    position: absolute;
+    top: 80px;
+    left: 50px;
+    z-index: 2;
+    color: white;
+}
+
+.text-overlay h1 {
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+.welcome-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+}
+
+.bold-white {
+    color: white;
+    font-weight: 900;
+    font-size: 100px;
+    margin-top: 14%;
+}
+
+.white-subtext {
+    color: white;
+    font-weight: 400;
+    font-size: 60px;
+    margin-top: -4%;
+}
+
+.center-image {
+    z-index: 2;
+    max-width: 550px;
+    height: auto;
+    padding-top: 12%;
+}
+
+/* left side */
+.left-login {
+    flex: 1;
+    background-color: #ffffff;
+    padding: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.left-login h1 {
+    color: #1a1a1a;
+    margin-bottom: 20px;
+}
+
+.left-login p {
+    color: #333;
+    margin-bottom: 40px;
+    line-height: 1.6;
+}
+
+.button-container {
+    display: flex;
+    gap: 20px;
+}
+
+.button-signup {
+    padding: 12px 24px;
+    min-width: 39%;
+    background-color: #0057D9;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    font-size: 25px;
+}
+
+.button-login {
+    background-color: #7DB7FF;
+    padding: 12px 24px;
+    min-width: 39%;
+    border: none;
+    border-radius: 8px;
+    color: black;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    font-size: 25px;
+}
+
+
+.button-signup:hover,
+.button-login:hover {
+    background-color: #0A2342;
+    color: white;
+}

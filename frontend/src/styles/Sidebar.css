@@ -1,0 +1,91 @@
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    background-color: #1154AC;
+    color: white;
+    width: 250px;
+    min-width: 250px;
+    height: 90vh; 
+    padding: 20px 0;
+    margin: 20px;
+    border-radius: 20px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  }
+  
+   .profile-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .profile-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+  
+  .profile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  } 
+  
+
+  .student-name {
+    font-size: 18px;
+    margin: 10px 0;
+    text-align: center;
+  }
+  
+  .nav-links {
+    flex-grow: 1;
+  }
+  
+  .nav-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 25px;
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.3s;
+  }
+  
+  .nav-item:hover {
+    background-color: #34495e;
+  }
+  
+  .nav-item.active {
+    background-color: #0D223C;
+    border-left: 4px solid #3498db;
+  }
+  
+  .icon {
+    margin-right: 15px;
+    font-size: 18px;
+  }
+  
+  .logout-section {
+    padding: 20px;
+  }
+  
+  .logout-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 10px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .logout-button:hover {
+    background-color: #c0392b;
+  }

@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "typeRoots": ["./node_modules/@types", "./src/types"]
+  },
+  "include": ["**/*.ts", "**/*.tsx", "../../college-portal/src/components/button.tsx", "../../college-portal/src/components/table.tsx", "../../college-portal/src/components/card.tsx", "../../college-portal/src/pages/App.tsx"],
+  "exclude": ["node_modules"]
+}

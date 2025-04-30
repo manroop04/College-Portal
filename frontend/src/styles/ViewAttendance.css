@@ -1,0 +1,124 @@
+/* Main Content Layout */
+.main-content {
+    display: flex;
+    min-height: 100vh;
+  }
+  
+  .content {
+    flex: 1;
+    padding: 2rem;
+    background-color: #f5f5f5;
+  }
+  
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .header-logo {
+    height: 50px;
+  }
+  
+  /* Attendance Container */
+  .attendance-container {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+  }
+  
+  /* Export Buttons */
+  .export-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+  
+  .export-button {
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+    color: white;
+  }
+  
+  .export-button.pdf {
+    background-color: #ef4444;
+  }
+  
+  .export-button.csv {
+    background-color: #10b981;
+  }
+  
+  .export-button.excel {
+    background-color: #3b82f6;
+  }
+  
+  .export-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Table Styles */
+  .attendance-table-container {
+    overflow-x: auto;
+    border-radius: 6px;
+    border: 1px solid #e0e0e0;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  th {
+    background-color: #f8fafc;
+    font-weight: 600;
+    color: #334155;
+  }
+  
+  tr:hover {
+    background-color: #f8fafc;
+  }
+  
+  /* Status Messages */
+  .loading-message,
+  .error-message,
+  .no-data-message {
+    padding: 2rem;
+    text-align: center;
+    font-size: 1.1rem;
+    color: #64748b;
+  }
+  
+  .error-message {
+    color: #ef4444;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .main-content {
+      flex-direction: column;
+    }
+    
+    .export-buttons {
+      flex-direction: column;
+    }
+    
+    .export-button {
+      width: 100%;
+    }
+  }
