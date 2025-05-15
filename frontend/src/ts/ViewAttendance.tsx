@@ -135,7 +135,7 @@ const ViewAttendance: React.FC = () => {
       <Sidebar student={student} activePage="attendance" />
       <div className="content">
         <header className="page-header">
-          <h1>Attendance Records</h1>
+          <h1>Admin</h1>
           <img src={logo} alt="Logo" className="header-logo" />
         </header>
         <div className="no-data-message">No attendance data found</div>

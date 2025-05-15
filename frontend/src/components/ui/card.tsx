@@ -12,59 +12,50 @@ interface CardComponent extends React.FC<CardProps> {
   Footer: React.FC<{ children: React.ReactNode; className?: string }>;
 }
 
-const CardHeader: React.FC<{ children: React.ReactNode; className?: string }> = ({ 
-  children, 
-  className = '' 
-}) => {
-  return (
-    <div className={`border-b border-gray-200 px-4 py-3 ${className}`}>
-      {children}
-    </div>
-  );
-};
+const CardHeader: React.FC<{ children: React.ReactNode; className?: string }> = ({
+  children,
+  className = '',
+}) => (
+  <div className={`px-5 py-3 border-b border-gray-100 bg-white font-medium text-gray-800 ${className}`}>
+    {children}
+  </div>
+);
 
-const CardTitle: React.FC<{ children: React.ReactNode; className?: string }> = ({ 
-  children, 
-  className = '' 
-}) => {
-  return (
-    <h3 className={`text-lg font-semibold text-gray-900 ${className}`}>
-      {children}
-    </h3>
-  );
-};
+const CardTitle: React.FC<{ children: React.ReactNode; className?: string }> = ({
+  children,
+  className = '',
+}) => (
+  <h3 className={`text-xl font-bold text-gray-800 ${className}`}>
+    {children}
+  </h3>
+);
 
-const CardContent: React.FC<{ children: React.ReactNode; className?: string }> = ({ 
-  children, 
-  className = '' 
-}) => {
-  return (
-    <div className={`p-4 ${className}`}>
-      {children}
-    </div>
-  );
-};
+const CardContent: React.FC<{ children: React.ReactNode; className?: string }> = ({
+  children,
+  className = '',
+}) => (
+  <div className={`px-5 py-4 text-gray-700 ${className}`}>
+    {children}
+  </div>
+);
 
-const CardFooter: React.FC<{ children: React.ReactNode; className?: string }> = ({ 
-  children, 
-  className = '' 
-}) => {
-  return (
-    <div className={`border-t border-gray-200 px-4 py-3 ${className}`}>
-      {children}
-    </div>
-  );
-};
+const CardFooter: React.FC<{ children: React.ReactNode; className?: string }> = ({
+  children,
+  className = '',
+}) => (
+  <div className={`px-5 py-3 border-t border-gray-100 bg-white ${className}`}>
+    {children}
+  </div>
+);
 
-const Card: CardComponent = ({ children, className = '' }) => {
-  return (
-    <div className={`bg-white rounded-lg shadow-md overflow-hidden ${className}`}>
-      {children}
-    </div>
-  );
-};
+const Card: CardComponent = ({ children, className = '' }) => (
+  <div
+    className={`bg-white rounded-2xl shadow-lg transition-shadow hover:shadow-xl duration-300 ${className}`}
+  >
+    {children}
+  </div>
+);
 
-// Assign subcomponents
 Card.Header = CardHeader;
 Card.Title = CardTitle;
 Card.Content = CardContent;
