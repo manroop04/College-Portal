@@ -5,7 +5,7 @@ import { Student, CourseAttendance } from '../types';
 import '../styles/Attendance.css';
 import profileImg from '../assets/profile.png';
 import logo from '../assets/logo.png';
-
+import axios from 'axios';
 
 const AttendancePage: React.FC = () => {
   const [student, setStudent] = useState<Student>({
@@ -29,13 +29,13 @@ const AttendancePage: React.FC = () => {
       attendedClasses: 45,
       absentClasses: 5
     },
-    {
-      courseName: 'Maths',
-      attendancePercentage: 75,
-      totalClasses: 48,
-      attendedClasses: 36,
-      absentClasses: 12
-    },
+    // {
+    //   courseName: 'Maths',
+    //   attendancePercentage: 75,
+    //   totalClasses: 48,
+    //   attendedClasses: 36,
+    //   absentClasses: 12
+    // },
     {
       courseName: 'Sports',
       attendancePercentage: 40,
@@ -51,6 +51,40 @@ const AttendancePage: React.FC = () => {
       absentClasses: 18
     }
   ]);
+
+  useEffect(() => {
+    interface MathsAttendanceAPIResponse {
+      roll_no: string;
+      subject: string;
+      attended: number;
+      absent: number;
+      total_classes: number;
+      attendance_percentage: number;
+    }
+  
+    axios
+    .get<MathsAttendanceAPIResponse[]>('http://localhost:5000/api/attendance/maths')
+      .then((res) => {
+        const student = res.data.find((s) => s.roll_no === 'LCI2022026'); // Can replace dynamically later for other students
+        if (student) {
+          const mathsData: CourseAttendance = {
+            courseName: student.subject,
+            totalClasses: student.total_classes,
+            attendedClasses: student.attended,
+            absentClasses: student.absent,
+            attendancePercentage: student.attendance_percentage,
+          };
+          setCourses((prev) => [
+            ...prev.filter(course => course.courseName !== 'Maths'),
+            mathsData
+          ]);          
+        }
+      })
+      .catch((err) => {
+        console.error('Failed to fetch Maths attendance:', err);
+      });
+  }, []);
+  
   
   return (
     <div className="attendance-page">
