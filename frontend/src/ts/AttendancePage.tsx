@@ -67,13 +67,22 @@ const AttendancePage: React.FC = () => {
       .then((res) => {
         const student = res.data.find((s) => s.roll_no === 'LCI2022026'); // Can replace dynamically later for other students
         if (student) {
-          const mathsData: CourseAttendance = {
+          const mathsData: CourseAttendance = student
+            ? {
             courseName: student.subject,
             totalClasses: student.total_classes,
             attendedClasses: student.attended,
             absentClasses: student.absent,
             attendancePercentage: student.attendance_percentage,
-          };
+            }
+          : {
+            courseName: 'Maths',
+            totalClasses: 0,
+            attendedClasses: 0,
+            absentClasses: 0,
+            attendancePercentage: 0,
+            };
+
           setCourses((prev) => [
             ...prev.filter(course => course.courseName !== 'Maths'),
             mathsData
