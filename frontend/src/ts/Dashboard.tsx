@@ -14,7 +14,7 @@ const Dashboard = () => {
   });
 
   const [time, setTime] = useState(new Date());
-  const [gpa, setGpa] = useState(3.82);
+  const [gpa, setGpa] = useState(8.62);
   const [todos, setTodos] = useState<string[]>([]);
   const [newTodo, setNewTodo] = useState('');
 
@@ -75,16 +75,16 @@ const Dashboard = () => {
             </div>
             <div className="gpa-display">
               <span className="gpa-value">{gpa.toFixed(2)}</span>
-              <span className="gpa-scale">/ 4.0</span>
+              <span className="gpa-scale">/ 10.0</span>
             </div>
             <div className="gpa-progress-container">
               <div 
                 className="gpa-progress-bar" 
-                style={{ width: `${(gpa / 4.0) * 100}%` }}
+                style={{ width: `${(gpa / 10.0) * 100}%` }}
               ></div>
             </div>
             <div className="gpa-message">
-              {gpa >= 3.5 ? 'Excellent standing!' : 'Keep improving!'}
+              {gpa >= 8 ? 'Excellent standing!' : 'Keep improving!'}
             </div>
           </div>
 

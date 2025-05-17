@@ -1,99 +1,111 @@
 .attendance-page {
-    display: flex;
-    height: 100vh;
+  display: flex;
+  min-height: 100vh;
+  margin-left: 240px; /* Match this with your sidebar width */
+  width: calc(100% - 240px); /* Subtract sidebar width */
+  transition: margin 0.3s ease;
+}
+
+.content {
+  flex-grow: 1;
+  padding: 20px;
+  background-color: #f5f5f5;
+  width: 100%;
+}
+
+/* Keep all your existing styles below exactly as they are */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.page-header h1 {
+  font-size: 24px;
+  margin: 0;
+}
+
+.header-logo {
+  height: 40px;
+  border-radius: 20px;
+  background-color: white;
+  padding: 5px 10px;
+}
+
+.attendance-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.attendance-card {
+  background-color: #0D223C;
+  border-radius: 10px;
+  padding: 20px;
+  color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.course-name {
+  font-size: 24px;
+  margin-top: 0;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.chart-container {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  margin: 0 auto 20px;
+}
+
+.percentage-display {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.present-percentage {
+  font-size: 24px;
+  font-weight: bold;
+  color: #89D73C;
+}
+
+.absent-percentage {
+  font-size: 16px;
+  color: #CC0A11;
+}
+
+.attendance-stats {
+  font-size: 16px;
+  margin: 0 auto;
+  display: block;
+  text-align: center;
+  font-weight: bold;
+}
+
+.attendance-stats p {
+  margin: 8px 0;
+}
+
+.attended {
+  color: #89D73C;
+}
+
+.absent {
+  color: #CC0A11;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .attendance-page {
+    margin-left: 0;
+    width: 100%;
   }
-  
-  .content {
-    flex-grow: 1;
-    padding: 20px;
-    background-color: #f5f5f5;
-  }
-  
-  .page-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #e0e0e0;
-  }
-  
-  .page-header h1 {
-    font-size: 24px;
-    margin: 0;
-  }
- 
-  .header-logo {
-    height: 40px;
-    border-radius: 20px;
-    background-color: white;
-    padding: 5px 10px;
-    
-  }
-  
-  .attendance-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-  }
-  
-  .attendance-card {
-    background-color: #0D223C;
-    border-radius: 10px;
-    padding: 20px;
-    color: white;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .course-name {
-    font-size: 24px;
-    margin-top: 0;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  .chart-container {
-    position: relative;
-    width: 150px;
-    height: 150px;
-    margin: 0 auto 20px;
-  }
-  
-  .percentage-display {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-  }
-  
-  .present-percentage {
-    font-size: 24px;
-    font-weight: bold;
-    color: #89D73C;
-  }
-  
-  .absent-percentage {
-    font-size: 16px;
-    color: #CC0A11;
-  }
-  
-  .attendance-stats {
-    font-size: 16px;
-    margin: 0 auto;
-    display: block;
-    text-align: center;
-    font-weight: bold;
-  }
-  
-  .attendance-stats p {
-    margin: 8px 0;
-  }
-  
-  .attended {
-    color: #89D73C;
-  }
-  
-  .absent {
-    color: #CC0A11;
-  }
+}

@@ -2,64 +2,60 @@ import React from 'react';
 import { Student } from '../../types';
 import '../../styles/Sidebar.css';
 
-
 interface SidebarProps {
   student: Student;
   activePage: 'dashboard' | 'inbox' | 'timetable' | 'profile' | 'attendance' | 'lost-found' | 'classroom';
+  onClose?: () => void;
+  isMobile?: boolean;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ student, activePage }) => {
-  return (
-    <div className="sidebar">
-      <div className="profile-section">
-        <div className="profile-image">
-          <img src={student.profileImage} alt={student.name} />
-        </div>
-        <h3 className="student-name">{student.name}</h3>
-      </div>
+const Sidebar: React.FC<SidebarProps> = ({ student, activePage, onClose, isMobile }) => {
+  const navItems = [
+    { id: 'dashboard', icon: 'grid_view', label: 'Dashboard' },
+    { id: 'inbox', icon: 'email', label: 'Inbox' },
+    { id: 'timetable', icon: 'calendar_today', label: 'Timetable' },
+    { id: 'profile', icon: 'person', label: 'Profile' },
+    { id: 'attendance', icon: 'check_circle', label: 'Attendance' },
+    { id: 'lost-found', icon: 'search', label: 'Lost & Found' },
+    { id: 'classroom', icon: 'school', label: 'Classroom' }
+  ];
 
-      <nav className="nav-links">
-        <a href="/dashboard" className={`nav-item ${activePage === 'dashboard' ? 'active' : ''}`}>
-          <i className="icon dashboard-icon"></i>
-          <span>Dashboard</span>
-        </a>
-        
-        <a href="/inbox" className={`nav-item ${activePage === 'inbox' ? 'active' : ''}`}>
-          <i className="icon inbox-icon"></i>
-          <span>Inbox</span>
-        </a>
-        
-        <a href="/timetable" className={`nav-item ${activePage === 'timetable' ? 'active' : ''}`}>
-          <i className="icon timetable-icon"></i>
-          <span>Timetable</span>
-        </a>
-        
-        <a href="/profile" className={`nav-item ${activePage === 'profile' ? 'active' : ''}`}>
-          <i className="icon profile-icon"></i>
-          <span>Profile</span>
-        </a>
-        
-        <a href="/attendance" className={`nav-item ${activePage === 'attendance' ? 'active' : ''}`}>
-          <i className="icon attendance-icon"></i>
-          <span>Attendance</span>
-        </a>
-        
-        <a href="/lost-found" className={`nav-item ${activePage === 'lost-found' ? 'active' : ''}`}>
-          <i className="icon lost-found-icon"></i>
-          <span>Lost and Found</span>
-        </a>
-        
-        <a href="/classroom" className={`nav-item ${activePage === 'classroom' ? 'active' : ''}`}>
-          <i className="icon classroom-icon"></i>
-          <span>Classroom</span>
-        </a>
-      </nav>
-      
-      <div className="logout-section">
-        <button className="logout-button">
-          <i className="icon logout-icon"></i>
-          <span>Logout</span>
+  return (
+    <div className={`sidebar ${isMobile ? 'mobile' : ''}`}>
+      {isMobile && (
+        <button className="sidebar-close" onClick={onClose}>
+          <span className="material-icons">close</span>
         </button>
+      )}
+
+      <div className="sidebar-content">
+        <div className="profile-section">
+          <div className="profile-image">
+            <img src={student.profileImage} alt={student.name} />
+          </div>
+          <h3 className="student-name">{student.name}</h3>
+          <p className="student-role">Student</p>
+        </div>
+
+        <nav className="nav-links">
+          {navItems.map((item) => (
+            <a
+              key={item.id}
+              href={`/${item.id}`}
+              className={`nav-item ${activePage === item.id ? 'active' : ''}`}
+            >
+              <span className="material-icons nav-icon">{item.icon}</span>
+              <span className="nav-label">{item.label}</span>
+            </a>
+          ))}
+        </nav>
+
+        <div className="sidebar-footer">
+          <button className="logout-button">
+            <span className="material-icons">logout</span>
+            <span>Logout</span>
+          </button>
+        </div>
       </div>
     </div>
   );

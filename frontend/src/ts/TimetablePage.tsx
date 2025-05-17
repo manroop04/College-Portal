@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Sidebar from '../components/ui/Sidebar';
 import TimetableGrid from '../components/ui/TimetableGrid';
 import { Student, TimeSlot } from '../types';
@@ -7,13 +7,13 @@ import profileImg from '../assets/profile.png';
 import logo from '../assets/logo.png';
 
 const TimetablePage: React.FC = () => {
-  const [student, setStudent] = useState<Student>({
+  const [student] = useState<Student>({
     id: '1',
     name: 'John Smith',
     profileImage: profileImg,
   });
   
-  const [timeSlots, setTimeSlots] = useState<TimeSlot[]>([
+  const [timeSlots] = useState<TimeSlot[]>([
     // Monday
     { id: 1, day: 'Monday', startTime: '8:00', endTime: '9:00', subject: 'DBMS', location: 'Room 120' },
     { id: 2, day: 'Monday', startTime: '10:00', endTime: '11:00', subject: 'OOPS', location: 'Room 108' },
@@ -40,7 +40,7 @@ const TimetablePage: React.FC = () => {
     { id: 17, day: 'Thursday', startTime: '3:00', endTime: '4:00', subject: 'DBMS', location: 'Room 120' },
     
     // Friday
-    { id: 18, day: 'Friday', startTime: '8:00', endTime: '9:00', subject: 'Sports', location: 'Wifi Graden' },
+    { id: 18, day: 'Friday', startTime: '8:00', endTime: '9:00', subject: 'Sports', location: 'Wifi Garden' },
     { id: 19, day: 'Friday', startTime: '10:00', endTime: '11:00', subject: 'CN', location: 'Room 118' },
     { id: 20, day: 'Friday', startTime: '12:00', endTime: '1:00', subject: 'DBMS', location: 'Room 120' },
     { id: 21, day: 'Friday', startTime: '3:00', endTime: '4:00', subject: 'OOPS', location: 'Room 103' },
@@ -50,14 +50,18 @@ const TimetablePage: React.FC = () => {
     <div className="timetable-page">
       <Sidebar student={student} activePage="timetable" />
       
-      <div className="content">
+      <main className="content">
         <header className="page-header">
-          <h1>Student</h1>
-          <img src={logo} alt="Logo" className="header-logo" />
+          <div>
+            <h1>Student</h1>
+          </div>
+          <img src={logo} alt="School Logo" className="header-logo" />
         </header>
         
-        <TimetableGrid timeSlots={timeSlots} />
-      </div>
+        <div className="timetable-container">
+          <TimetableGrid timeSlots={timeSlots} />
+        </div>
+      </main>
     </div>
   );
 };
