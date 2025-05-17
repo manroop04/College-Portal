@@ -1,9 +1,10 @@
 .attendance-page {
   display: flex;
   min-height: 100vh;
-  margin-left: 240px; /* Match this with your sidebar width */
-  width: calc(100% - 240px); /* Subtract sidebar width */
+  margin-left: 240px; /* Must match sidebar width */
+  width: calc(100% - 240px); /* Must match sidebar width */
   transition: margin 0.3s ease;
+  position: relative; /* Add this */
 }
 
 .content {

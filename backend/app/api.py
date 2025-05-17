@@ -1369,6 +1369,36 @@ def google_auth():
         print(f"Token exchange error: {str(e)}")
         return jsonify({'error': str(e)}), 500
 
+@app.route('/api/attendance/maths', methods=['GET'])
+def get_maths_attendance():
+    try:
+        file_path = os.path.join(os.path.dirname(__file__), '..', 'output', 'attendance.csv')
+        df = pd.read_csv(file_path, header=None)
+
+        results = []
+        for _, row in df.iterrows():
+            roll_no = row[0]
+            maths_entries = row[1:]  # Skip first column : roll number
+
+            present = sum(1 for v in maths_entries if str(v).strip() in ('1', '1.0'))
+            absent = sum(1 for v in maths_entries if str(v).strip() in ('0', '0.0'))
+            total = present + absent
+            percentage = round((present / total) * 100) if total > 0 else 0
+
+            results.append({
+                'roll_no': roll_no,
+                'subject': 'Maths',
+                'attended': present,
+                'absent': absent,
+                'total_classes': total,
+                'attendance_percentage': percentage
+            })
+
+        return jsonify(results)
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
 @app.route('/api/auth/refresh', methods=['POST'])
 def refresh_token():
     try:

@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import Sidebar from '../components/ui/Sidebar';
 import AttendanceCard from '../components/ui/AttendanceCard';
 import { Student, CourseAttendance } from '../types';
 import '../styles/Attendance.css';
 import profileImg from '../assets/profile.png';
 import logo from '../assets/logo.png';
+import axios from 'axios';
 
 const AttendancePage: React.FC = () => {
   const [student] = useState<Student>({
@@ -14,7 +15,7 @@ const AttendancePage: React.FC = () => {
 
   });
   
-  const [courses] = useState<CourseAttendance[]>([
+  const [courses,setCourses] = useState<CourseAttendance[]>([
     {
       courseName: 'DBMS',
       attendancePercentage: 80,
@@ -29,11 +30,18 @@ const AttendancePage: React.FC = () => {
       attendedClasses: 45,
       absentClasses: 5
     },
+    // {
+    //   courseName: 'Maths',
+    //   attendancePercentage: 75,
+    //   totalClasses: 48,
+    //   attendedClasses: 36,
+    //   absentClasses: 12
+    // },
     {
       courseName: 'Sports',
-      attendancePercentage: 75,
-      totalClasses: 48,
-      attendedClasses: 36,
+      attendancePercentage: 40,
+      totalClasses: 20,
+      attendedClasses: 8,
       absentClasses: 12
     },
     {
@@ -43,20 +51,50 @@ const AttendancePage: React.FC = () => {
       attendedClasses: 8,
       absentClasses: 12
     },
-    {
-      courseName: 'Maths',
-      attendancePercentage: 60,
-      totalClasses: 45,
-      attendedClasses: 27,
-      absentClasses: 18
-    }
   ]);
 
-  const getAttendanceLevel = (percentage: number) => {
-    if (percentage >= 80) return 'high';
-    if (percentage >= 60) return 'medium';
-    return 'low';
-  };
+  useEffect(() => {
+    interface MathsAttendanceAPIResponse {
+      roll_no: string;
+      subject: string;
+      attended: number;
+      absent: number;
+      total_classes: number;
+      attendance_percentage: number;
+    }
+  
+    axios
+    .get<MathsAttendanceAPIResponse[]>('http://localhost:5000/api/attendance/maths')
+      .then((res) => {
+        const student = res.data.find((s) => s.roll_no === 'LCI2022026'); // Can replace dynamically later for other students
+        if (student) {
+          const mathsData: CourseAttendance = student
+            ? {
+            courseName: student.subject,
+            totalClasses: student.total_classes,
+            attendedClasses: student.attended,
+            absentClasses: student.absent,
+            attendancePercentage: student.attendance_percentage,
+            }
+          : {
+            courseName: 'Maths',
+            totalClasses: 0,
+            attendedClasses: 0,
+            absentClasses: 0,
+            attendancePercentage: 0,
+            };
+
+          setCourses((prev) => [
+            ...prev.filter(course => course.courseName !== 'Maths'),
+            mathsData
+          ]);          
+        }
+      })
+      .catch((err) => {
+        console.error('Failed to fetch Maths attendance:', err);
+      });
+  }, []);
+  
 
   return (
     <div className="attendance-page">
@@ -72,13 +110,7 @@ const AttendancePage: React.FC = () => {
         
         <div className="attendance-cards">
           {courses.map(course => (
-            <div 
-              key={course.courseName}
-              className="attendance-card"
-              data-percentage={getAttendanceLevel(course.attendancePercentage)}
-            >
-              <AttendanceCard course={course} />
-            </div>
+            <AttendanceCard key={course.courseName} course={course} />
           ))}
         </div>
       </main>
