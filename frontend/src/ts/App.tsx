@@ -20,6 +20,7 @@ import LostItemDetail from "./LostItemDetails";
 import FoundItemDetail from "./FoundItemDetails";
 import Dashboard from "./Dashboard"
 import AdminAttendance from "./AdminAttendance"
+import ClassroomPage from './ClassroomPage';
 
 
 const theme = createTheme();
@@ -55,7 +56,6 @@ const App = () => {
           <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
             <Routes>
               {/* <Route path="/" element={<Home />} /> */}
-              {/* <Route path="/login" element={<LoginPage />} /> */}
               <Route path="/take-attendance" element={<TakeAttendance />} />
               <Route path="/view-attendance" element={<ViewAttendance />} />
               <Route path="/register-student" element={<RegisterStudent />} />
@@ -74,6 +74,7 @@ const App = () => {
               <Route path="/register-face" element={<RegisterStudent />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/admin-attendance" element={<AdminAttendance />} />
+              <Route path="/classroom" element={<ClassroomPage />} />
             </Routes>
           </main>
         </div>
