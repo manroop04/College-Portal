@@ -31,5 +31,7 @@ backend/uploads/
 
 backend/env/
 backend/venv/
+.env
+frontend/env/
 
 

@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify, Response
 from flask_cors import CORS
+import requests
 import cv2
 import numpy as np
 import base64
@@ -20,10 +21,23 @@ from io import BytesIO
 from flask import make_response
 from fpdf import FPDF
 import pandas as pd
-from datetime import datetime
+from google.oauth2 import id_token
+from google.auth.transport import requests as google_requests
+import google.auth.transport.requests
+from googleapiclient.discovery import build
+from datetime import datetime, timedelta
+from dotenv import load_dotenv
+from google.oauth2 import id_token
+from google.auth.transport import requests as google_requests
+from googleapiclient.discovery import build
+from google.oauth2.credentials import Credentials  # This is the correct import
+from google.auth.exceptions import GoogleAuthError
+
+load_dotenv()
 
 app = Flask(__name__)
 CORS(app)
+
 
 # Configuration
 UPLOAD_FOLDER = 'uploads'
@@ -34,6 +48,8 @@ MODEL_PATH = config.MODEL_PATH
 CAPTURE_DURATION = config.CAPTURE_DURATION
 DATASET = config.DATASET
 
+CLIENT_ID = os.getenv('GOOGLE_CLIENT_ID')
+CLIENT_SECRET = os.getenv('GOOGLE_CLIENT_SECRET')
 # Ensure directories exist
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
@@ -1181,5 +1197,242 @@ def process_video_file(recognizer, video_path):
     cap.release()
     return present_students
 
+# @app.route('/api/auth', methods=['POST'])
+# def authenticate():
+#     try:
+#         token = request.json.get('token')
+        
+#         # Verify the ID token
+#         idinfo = id_token.verify_oauth2_token(
+#             token, 
+#             google_requests.Request(),
+#             CLIENT_ID
+#         )
+        
+#         # If verification succeeds, return success
+#         return jsonify({
+#             'success': True,
+#             'email': idinfo['email']
+#         })
+        
+#     except ValueError as e:
+#         # Invalid token
+#         return jsonify({
+#             'success': False,
+#             'error': 'Invalid token'
+#         }), 401
+#     except Exception as e:
+#         return jsonify({
+#             'success': False,
+#             'error': str(e)
+#         }), 401
+# Your existing email endpoint
+
+@app.route('/api/emails/<email_id>/content', methods=['GET'])
+def get_email_content(email_id):
+    try:
+        auth_header = request.headers.get('Authorization')
+        if not auth_header:
+            return jsonify({'error': 'Authorization header missing'}), 401
+            
+        token = auth_header.split(' ')[1]
+        creds = Credentials(token)
+        service = build('gmail', 'v1', credentials=creds)
+        
+        msg = service.users().messages().get(
+            userId='me',
+            id=email_id,
+            format='full'
+        ).execute()
+        
+        # Extract email body content
+        email_data = {
+            'id': email_id,
+            'body': {'html': None, 'text': None}
+        }
+        
+        payload = msg['payload']
+        if 'parts' in payload:
+            for part in payload['parts']:
+                if part['mimeType'] == 'text/html':
+                    email_data['body']['html'] = base64.urlsafe_b64decode(part['body']['data']).decode('utf-8')
+                elif part['mimeType'] == 'text/plain':
+                    email_data['body']['text'] = base64.urlsafe_b64decode(part['body']['data']).decode('utf-8')
+        else:
+            if payload['mimeType'] == 'text/html':
+                email_data['body']['html'] = base64.urlsafe_b64decode(payload['body']['data']).decode('utf-8')
+            elif payload['mimeType'] == 'text/plain':
+                email_data['body']['text'] = base64.urlsafe_b64decode(payload['body']['data']).decode('utf-8')
+        
+        return jsonify(email_data)
+        
+    except Exception as e:
+        print(f"Error fetching email content: {str(e)}")
+        return jsonify({'error': str(e)}), 500
+    
+@app.route('/api/emails', methods=['GET'])
+def get_emails():
+    try:
+        print("\n=== Starting email fetch ===")
+        
+        # Verify authentication
+        auth_header = request.headers.get('Authorization')
+        if not auth_header:
+            return jsonify({'error': 'Authorization header missing'}), 401
+            
+        token = auth_header.split(' ')[1]
+        creds = Credentials(token)
+        service = build('gmail', 'v1', credentials=creds)
+        
+        # Try a simple query first - remove all filters
+        query = 'in:inbox'
+        print(f"Using query: {query}")
+        
+        results = service.users().messages().list(
+            userId='me',
+            maxResults=10,  # Start with just 10 emails
+            q=query
+        ).execute()
+        
+        messages = results.get('messages', [])
+        print(f"Found {len(messages)} raw messages")
+        
+        emails = []
+        for message in messages:
+            msg = service.users().messages().get(
+                userId='me',
+                id=message['id'],
+                format='metadata',  # Start with metadata only
+                metadataHeaders=['Subject', 'From', 'Date']
+            ).execute()
+            
+            headers = {h['name']: h['value'] for h in msg['payload']['headers']}
+            
+            emails.append({
+                'id': message['id'],
+                'subject': headers.get('Subject', 'No Subject'),
+                'from': headers.get('From', 'Unknown'),
+                'date': headers.get('Date', ''),
+                'snippet': msg.get('snippet', '')
+            })
+        
+        print(f"Returning {len(emails)} processed emails")
+        print("Sample email:", emails[0] if emails else "None")
+        
+        return jsonify(emails)
+        
+    except Exception as e:
+        print(f"Error: {str(e)}")
+        return jsonify({'error': str(e)}), 500
+# Google Auth endpoint for token exchange
+@app.route('/api/auth/google', methods=['POST'])
+def google_auth():
+    try:
+        code = request.json.get('code')
+        redirect_uri = request.json.get('redirect_uri', 'http://localhost:3001')  # Default to 3001
+        
+        if not code:
+            return jsonify({'error': 'Authorization code is required'}), 400
+
+        token_url = "https://oauth2.googleapis.com/token"
+        payload = {
+            'code': code,
+            'client_id': os.getenv('GOOGLE_CLIENT_ID'),
+            'client_secret': os.getenv('GOOGLE_CLIENT_SECRET'),
+            'redirect_uri': redirect_uri,  # Use the provided URI
+            'grant_type': 'authorization_code'
+        }
+
+        response = requests.post(
+            token_url,
+            data=payload,
+            headers={'Content-Type': 'application/x-www-form-urlencoded'}
+        )
+
+        if response.status_code != 200:
+            error_data = response.json()
+            print(f"Google OAuth error: {error_data}")
+            return jsonify({
+                'error': error_data.get('error_description', 'OAuth authentication failed')
+            }), 400
+
+        token_data = response.json()
+        return jsonify({
+            'access_token': token_data['access_token'],
+            'expires_in': token_data['expires_in'],
+            'refresh_token': token_data.get('refresh_token', ''),
+            'scope': token_data['scope'],
+            'token_type': token_data['token_type']
+        })
+
+    except Exception as e:
+        print(f"Token exchange error: {str(e)}")
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/attendance/maths', methods=['GET'])
+def get_maths_attendance():
+    try:
+        file_path = os.path.join(os.path.dirname(__file__), '..', 'output', 'attendance.csv')
+        df = pd.read_csv(file_path, header=None)
+
+        results = []
+        for _, row in df.iterrows():
+            roll_no = row[0]
+            maths_entries = row[1:]  # Skip first column : roll number
+
+            present = sum(1 for v in maths_entries if str(v).strip() in ('1', '1.0'))
+            absent = sum(1 for v in maths_entries if str(v).strip() in ('0', '0.0'))
+            total = present + absent
+            percentage = round((present / total) * 100) if total > 0 else 0
+
+            results.append({
+                'roll_no': roll_no,
+                'subject': 'Maths',
+                'attended': present,
+                'absent': absent,
+                'total_classes': total,
+                'attendance_percentage': percentage
+            })
+
+        return jsonify(results)
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/auth/refresh', methods=['POST'])
+def refresh_token():
+    try:
+        refresh_token = request.json.get('refresh_token')
+        if not refresh_token:
+            return jsonify({'error': 'Refresh token is required'}), 400
+
+        token_url = "https://oauth2.googleapis.com/token"
+        payload = {
+            'client_id': os.getenv('GOOGLE_CLIENT_ID'),
+            'client_secret': os.getenv('GOOGLE_CLIENT_SECRET'),
+            'refresh_token': refresh_token,
+            'grant_type': 'refresh_token'
+        }
+
+        response = requests.post(
+            token_url,
+            data=payload,
+            headers={'Content-Type': 'application/x-www-form-urlencoded'}
+        )
+
+        if response.status_code != 200:
+            error_data = response.json()
+            return jsonify({
+                'error': error_data.get('error_description', 'Refresh failed')
+            }), 400
+
+        token_data = response.json()
+        return jsonify({
+            'access_token': token_data['access_token'],
+            'expires_in': token_data['expires_in']
+        })
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500    
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5000, debug=True)

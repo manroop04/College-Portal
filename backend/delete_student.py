@@ -72,7 +72,7 @@ def delete_student_completely(student_name):
         )
         return False, error_msg
     
-success, message = delete_student_completely("123")
+success, message = delete_student_completely("dataset")
 if success:
     print("Successfully deleted all records")
 else:
