@@ -23,6 +23,8 @@ import Dashboard from "./Dashboard"
 import AdminAttendance from "./AdminAttendance"
 import ClassroomPage from './ClassroomPage';
 import Inbox from "./Inbox";
+import StudyMaterialPage from './CoursePage';
+import AssignmentPage from './AssignmentPage';
 const theme = createTheme();
 
 const App = () => {
@@ -62,7 +64,8 @@ const App = () => {
                 <Route path="/admin-attendance" element={<AdminAttendance />} />
                 <Route path="/inbox" element={<Inbox />} />
                 <Route path="/classroom" element={<ClassroomPage/>} />
-                {/* Redirect root to attendance */}
+                <Route path="/course/:courseId" element={<StudyMaterialPage/>} />
+                <Route path="/assignment/:assignmentId" element={<AssignmentPage />} />
                 <Route path="/" element={<Navigate to="/attendance" replace />} />
               </Routes>
             </main>

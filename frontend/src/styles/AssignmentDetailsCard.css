@@ -1,0 +1,103 @@
+.assignment-card-wrapper {
+  background-color: #f9fafb;
+  padding: 2rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  border-radius: 1rem;
+  max-width: 900px;
+  margin: 2rem auto;
+}
+
+.assignment-card {
+  background-color: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  padding: 1.5rem;
+}
+
+.assignment-title h2 {
+  background-color: #fdba74; /* Tailwind's orange-300 */
+  color: black;
+  font-size: 1.25rem;
+  font-weight: 600;
+  display: inline-block;
+  padding: 0.25rem 1rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.assignment-divider {
+  margin-bottom: 1rem;
+}
+
+.assignment-list {
+  list-style-type: decimal;
+  padding-left: 1.5rem;
+  color: #1f2937; /* gray-800 */
+  margin-bottom: 1rem;
+}
+
+.assignment-note {
+  font-size: 0.875rem;
+  color: #4b5563; /* gray-600 */
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+
+.assignment-pdf {
+  display: flex;
+  align-items: center;
+  border: 1px solid black;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  width: fit-content;
+  margin-bottom: 1rem;
+}
+
+.assignment-pdf-icon {
+  width: 1.75rem; /* w-7 */
+  height: 1.75rem;
+  margin-right: 0.5rem;
+}
+
+.assignment-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+
+.assignment-deadline {
+  background-color: #f87171; /* red-400 */
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.assignment-actions button {
+  margin-left: 0.5rem;
+}
+
+.upload-btn {
+  background-color: #2563eb; /* blue-600 */
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+}
+
+.upload-btn:hover {
+  background-color: #1d4ed8; /* blue-700 */
+}
+
+.submit-btn {
+  background-color: #16a34a; /* green-600 */
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+}
+
+.submit-btn:hover {
+  background-color: #15803d; /* green-700 */
+}

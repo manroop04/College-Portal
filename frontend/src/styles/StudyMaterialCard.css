@@ -1,0 +1,48 @@
+.study-material-container{
+  display: flex;
+  flex-direction: row;
+  gap: 13%; /* Adds space between cards */
+  justify-content: center; /* Centers cards horizontally */
+  flex-wrap: wrap; /* Allows cards to wrap on smaller screens */
+  padding: 20px;
+}
+.card-container {
+  width: 20%;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding:3%;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.card-image {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin-bottom: 20px;
+}
+
+.card-button {
+  background-color: #0057d9;
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.card-button:hover {
+  background-color: #003eaa;
+}

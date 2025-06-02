@@ -1,0 +1,27 @@
+.assignment-container{
+border: 1px solid #ccc;
+  border-radius: 12px;
+  padding:3%;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.missing-check{
+
+}
+.assignment-title{
+
+}
+.due-date{
+    color: red;
+    font-size: 20px;
+}
+
+.submitted-check img{
+    height: 20px;
+    width: 20px;
+    
+}
+
+.assignment-button{
+    background-color: #007fd9;
+}
